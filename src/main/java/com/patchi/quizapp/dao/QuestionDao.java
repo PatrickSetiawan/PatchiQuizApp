@@ -1,5 +1,7 @@
 package com.patchi.quizapp.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +15,7 @@ import com.patchi.quizapp.Question;
 @Repository
 public interface QuestionDao extends JpaRepository<Question, Integer> {
 
+    // we don't need to run any additional SQL/HQL query sinc JPA does it knows when we type "findByCategory", it wants us to
+    // search based on the "category" column in our table. So smart!
+    List<Question> findByCategory(String category);
 }

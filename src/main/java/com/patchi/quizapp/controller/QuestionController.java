@@ -3,6 +3,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,9 +15,8 @@ import com.patchi.quizapp.service.QuestionService;
  */
 
 // making this as a RestController makes it accept requests
-@RestController
-
 // requests that are coming from the path "question" will be handled by QuestinController
+@RestController
 @RequestMapping("question")
 public class QuestionController {
 
@@ -28,5 +28,12 @@ public class QuestionController {
     @GetMapping("allQuestions")
     public List<Question> getAllQuestions() {
         return questionService.getAllQuestions();
+    }
+
+    // @PathVariable allows the mapping of {category} to the argument name String category. If the two names are different
+    // however, you must specify the target String inside the {}. E.g ...(@PathVariable("cat") String category) if {cat}
+    @GetMapping("category/{category}")
+    public List<Question> getQuestionsByCategory(@PathVariable String category) {
+        return questionService.getQuestionsByCategory(category);
     }
 }
