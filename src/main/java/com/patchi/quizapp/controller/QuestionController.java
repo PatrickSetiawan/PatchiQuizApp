@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +17,7 @@ import com.patchi.quizapp.service.QuestionService;
  */
 
 // making this as a RestController makes it accept requests
-// requests that are coming from the path "question" will be handled by QuestinController
+// requests that are coming from the path "question/" will be handled by Question Controller
 @RestController
 @RequestMapping("question")
 public class QuestionController {
@@ -35,5 +37,13 @@ public class QuestionController {
     @GetMapping("category/{category}")
     public List<Question> getQuestionsByCategory(@PathVariable String category) {
         return questionService.getQuestionsByCategory(category);
+    }
+
+    // @RequestBody means that you are sending the data as a request from client to server. The body refers to the data
+    // @PostMapping is similar to @GetMapping except it's used for sending data to the server, as opposed to fetching data
+    @PostMapping("add")
+    public String addQuestion(@RequestBody Question question) {
+        questionService.addQuestion(question);
+        return "success";
     }
 }

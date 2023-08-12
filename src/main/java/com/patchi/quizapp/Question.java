@@ -20,7 +20,7 @@ public class Question {
 
     // these annotations sets the variable id as the Primary Key, and makes its values to be auto-generated
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String category;
     private String difficulty;
